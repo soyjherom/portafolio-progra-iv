@@ -6,7 +6,7 @@ import { CreateTodoButton } from './CreateTodoButton';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 const todos = [
-  {description: 'Algo por hacer 1',completed: false},
+  {description: 'Algo por hacer 1',completed: true},
   {description: 'Algo por hacer 2',completed: false},
   {description: 'Algo por hacer 3',completed: false}
 ]
@@ -22,7 +22,11 @@ function App() {
       <TodoSearch/>      
       <TodoList>
         {todos.map(todo=>(
-            <TodoItem key={todo.description} text={todo.description}/>
+            <TodoItem 
+              key={todo.description} 
+              text={todo.description}
+              completed={todo.completed}
+            />
         ))}
       </TodoList>
       <CreateTodoButton/>
