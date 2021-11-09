@@ -30,8 +30,9 @@ function useCookies(nombreCookie, contenidoCookie){
       const elementosSerializados = JSON.stringify(elementos)
       localStorage.setItem(nombreCookie, elementosSerializados)
     }
+    setElemento(elementos)
   }
-  return [elemento, setElemento]
+  return [elemento, guardar]
 }
 
 function useSearch(tareas){
