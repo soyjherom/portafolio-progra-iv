@@ -56,10 +56,27 @@ function useSearch(tareas){
   return [valorBuscado, tareasBuscadas, buscarTarea]
 }
 
+function useGetBtc(){
+  const [data, obtenerData] = React.useState(null)
+  
+  const consultar = async() => {
+    const peticion = await fetch('http://api.coindesk.com/v1/bpi/currentprice.json')
+    const respuesta = await peticion.json()
+    obtenerData(respuesta)
+  }
+
+  React.useEffect(()=>{
+    consultar()
+  }, [])
+
+  return data.bpi.USD.rate
+}
+
 function App() {
   //Uso de custom hooks
   const[tareas, guardar] = useCookies(nombreLista, contenidoLista)
   const[valorBuscado, tareasBuscadas, buscarTarea] = useSearch(tareas)
+  const btc = useGetBtc()
 
   const tareasCompletadas = tareas.filter(tarea => tarea.completada).length
   const totalTareas = tareas.length
@@ -84,6 +101,7 @@ function App() {
 
   return (
      <UI
+     btc={btc}
      tareasCompletadas={tareasCompletadas}
      totalTareas={totalTareas}
      valorBuscado={valorBuscado}

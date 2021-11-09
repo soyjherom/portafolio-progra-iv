@@ -5,6 +5,7 @@ import { ListaTareas } from '../ListaTareas/'
 import { Tarea } from '../Tarea/'
 import { BotonCrear } from '../BotonCrear/'
 function UI({
+    btc,
     tareasCompletadas,
     totalTareas,
     valorBuscado,
@@ -25,6 +26,7 @@ function UI({
             funcionBuscar={buscarTarea}
         />
         <ListaTareas>
+            {<p>Valor de 1 Bitcoin: {btc}</p>}
             {tareasBuscadas.map(tarea =>(
             <Tarea
                 texto={tarea.texto}
