@@ -34,15 +34,9 @@ function useCookies(nombreCookie, contenidoCookie){
   return [elemento, setElemento]
 }
 
-function App() {
-  //Uso de custom hooks
-  const[tareas, guardar] = useCookies(nombreLista, contenidoLista)
-  
+function useSearch(tareas){
   //Hooks de React para interactuar con el DOM
   const [valorBuscado, buscarTarea] = React.useState('')
-
-  const tareasCompletadas = tareas.filter(tarea => tarea.completada).length
-  const totalTareas = tareas.length
 
   //Comportamiento de busqueda
   let tareasBuscadas = []
@@ -57,6 +51,17 @@ function App() {
       }
     )
   }
+
+  return [valorBuscado, tareasBuscadas, buscarTarea]
+}
+
+function App() {
+  //Uso de custom hooks
+  const[tareas, guardar] = useCookies(nombreLista, contenidoLista)
+  const[valorBuscado, tareasBuscadas, buscarTarea] = useSearch(tareas)
+
+  const tareasCompletadas = tareas.filter(tarea => tarea.completada).length
+  const totalTareas = tareas.length
 
   const completar = (texto) =>{
     const indice = tareas.findIndex(tarea => tarea.texto == texto)
