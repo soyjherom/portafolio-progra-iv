@@ -76,6 +76,7 @@ function App() {
   //Uso de custom hooks
   const[tareas, guardar] = useCookies(nombreLista, contenidoLista)
   const[valorBuscado, tareasBuscadas, buscarTarea] = useSearch(tareas)
+  
   const btc = useGetBtc()
 
   const tareasCompletadas = tareas.filter(tarea => tarea.completada).length
